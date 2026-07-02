@@ -1,0 +1,28 @@
+services:
+  # 1. FastAPI Backend
+  - type: web
+    name: aether-cool-api
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
+
+  # 2. React Frontend
+  - type: web
+    name: aether-cool-ui
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+      - key: VITE_API_URL
+        # This automatically points your frontend to the backend URL Render generates
+        fromService:
+          type: web
+          name: aether-cool-api
+          envVarKey: RENDER_EXTERNAL_URL

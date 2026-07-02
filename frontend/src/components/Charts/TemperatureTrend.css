@@ -1,0 +1,75 @@
+.temperature-trend {
+  width: 100%;
+}
+
+.temperature-trend__header {
+  margin-bottom: 16px;
+}
+
+.temperature-trend__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.temperature-trend__subtitle {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+}
+
+.temperature-trend__chart {
+  width: 100%;
+}
+
+/* Custom Tooltip */
+.trend-tooltip {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  box-shadow: var(--shadow-glass);
+  min-width: 160px;
+}
+
+.trend-tooltip__month {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.trend-tooltip__row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 3px;
+}
+
+.trend-tooltip__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.trend-tooltip__label {
+  flex: 1;
+}
+
+.trend-tooltip__val {
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+}
+
+.trend-tooltip__delta {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border-glass);
+  font-size: 0.72rem;
+  color: var(--accent-teal-light);
+  font-weight: 600;
+}

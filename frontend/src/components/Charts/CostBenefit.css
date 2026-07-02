@@ -1,0 +1,44 @@
+.cb-chart-container {
+  padding: var(--space-sm) 0;
+}
+
+.cb-tooltip {
+  background: var(--bg-glass-strong);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+}
+
+.cb-tooltip-label {
+  color: var(--text-primary) !important;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+.cb-tooltip-value {
+  color: var(--accent-emerald) !important;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.cb-tooltip-value span {
+  color: var(--text-secondary) !important;
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
+.cb-insight {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-secondary) !important;
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-glass);
+}
+
+.cb-best {
+  color: var(--accent-emerald) !important;
+  font-weight: 600;
+}

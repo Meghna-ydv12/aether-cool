@@ -1,0 +1,120 @@
+.sc-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.sc-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-glass);
+  border-left: 3px solid var(--sc-accent, var(--accent-teal));
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  transition: all var(--transition-base);
+  animation: slideUp 0.4s ease-out backwards;
+  position: relative;
+}
+
+.sc-card:hover {
+  transform: translateX(4px);
+  border-color: var(--sc-accent);
+  box-shadow: var(--shadow-glass);
+}
+
+.sc-card-recommended {
+  background: rgba(16, 185, 129, 0.06);
+  border-color: var(--accent-emerald);
+}
+
+.sc-badge {
+  position: absolute;
+  top: -1px;
+  right: var(--space-md);
+  background: var(--gradient-teal);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sc-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.sc-icon {
+  font-size: 1.3rem;
+}
+
+.sc-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.sc-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.sc-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sc-metric-label {
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sc-metric-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+}
+
+.sc-delta {
+  color: var(--accent-emerald);
+}
+
+.sc-equity-bar {
+  position: relative;
+  height: 18px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.sc-equity-fill {
+  height: 100%;
+  background: var(--gradient-teal);
+  border-radius: var(--radius-full);
+  transition: width 0.6s ease-out;
+}
+
+.sc-equity-text {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.sc-top-intervention {
+  font-size: 0.75rem;
+  color: var(--text-secondary) !important;
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-glass);
+}

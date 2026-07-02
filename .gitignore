@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Environment
+.env
+.env.local
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data (large files)
+data/sample/*.geojson
+data/sample/numpy/
+data/models/*.pth
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker/

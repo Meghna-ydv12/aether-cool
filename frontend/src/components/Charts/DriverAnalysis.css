@@ -1,0 +1,49 @@
+.driver-analysis {
+  width: 100%;
+}
+
+.driver-analysis__header {
+  margin-bottom: 16px;
+}
+
+.driver-analysis__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.driver-analysis__subtitle {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+}
+
+.driver-analysis__chart {
+  width: 100%;
+}
+
+/* Custom Tooltip */
+.driver-tooltip {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-glass);
+}
+
+.driver-tooltip__name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.driver-tooltip__value {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.driver-tooltip__value strong {
+  color: var(--accent-teal-light);
+}

@@ -1,0 +1,130 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-glass);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 1000;
+  animation: slideDown 0.4s ease-out;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+.header__title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.header__title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.header__title-separator {
+  color: var(--text-tertiary);
+  font-weight: 300;
+}
+
+.header__title-cool {
+  color: var(--text-primary);
+  font-weight: 300;
+  letter-spacing: 3px;
+}
+
+.header__subtitle {
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header__status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-emerald);
+}
+
+.header__status-dot--live {
+  animation: pulseGlow 2s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.header__status-text {
+  font-size: 0.75rem;
+  color: var(--accent-emerald);
+  font-weight: 500;
+}
+
+.header__divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border-glass);
+}
+
+.header__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.header__info-label {
+  font-size: 0.6rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.header__info-value {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .header__right {
+    display: none;
+  }
+}
