@@ -31,10 +31,21 @@ client.interceptors.response.use(
 
 // ── Mock Data ─────────────────────────────────────────────────────────────
 
-export const MOCK_HEATMAP_DATA = (() => {
+const CITIES = {
+  "mumbai": { lat: 19.0760, lng: 72.8777 },
+  "bangalore": { lat: 12.9716, lng: 77.5946 },
+  "chennai": { lat: 13.0827, lng: 80.2707 },
+  "hyderabad": { lat: 17.3850, lng: 78.4867 },
+  "kolkata": { lat: 22.5726, lng: 88.3639 },
+  "delhi ncr": { lat: 28.6139, lng: 77.2090 }
+};
+
+export const MOCK_HEATMAP_DATA = (city = 'delhi ncr') => {
   const points = [];
-  const centerLat = 28.6139;
-  const centerLng = 77.2090;
+  const location = CITIES[city.toLowerCase()] || CITIES['delhi ncr'];
+  const centerLat = location.lat;
+  const centerLng = location.lng;
+  
   for (let i = 0; i < 50; i++) {
     for (let j = 0; j < 50; j++) {
       const lat = centerLat - 0.15 + (i / 50) * 0.30;
@@ -50,7 +61,7 @@ export const MOCK_HEATMAP_DATA = (() => {
     }
   }
   return points;
-})();
+};
 
 export const MOCK_DRIVERS = [
   { name: 'NDVI (Vegetation)', value: 3.2, fullMark: 4 },
@@ -118,12 +129,12 @@ export const MOCK_SCENARIOS = [
 
 // ── API Functions with Mock Fallback ──────────────────────────────────────
 
-export async function fetchHeatmapData() {
+export async function fetchHeatmapData(city = 'Delhi NCR') {
   try {
-    const res = await client.get('/api/heatmap');
+    const res = await client.get(`/api/heatmap?city=${encodeURIComponent(city)}`);
     return res.data;
   } catch {
-    return MOCK_HEATMAP_DATA;
+    return MOCK_HEATMAP_DATA(city);
   }
 }
 

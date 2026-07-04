@@ -13,7 +13,7 @@ const STATS = [
   { label: 'Coverage', value: '89%', icon: '📍', trend: 'Population at risk', color: '#8b5cf6' },
 ]
 
-export default function Dashboard() {
+export default function Dashboard({ selectedCity = 'Delhi NCR' }) {
   const [selectedZone, setSelectedZone] = useState(null)
 
   return (
@@ -34,7 +34,7 @@ export default function Dashboard() {
 
       {/* Map Section */}
       <div className="dashboard-map-section">
-        <HeatMap onZoneSelect={setSelectedZone} />
+        <HeatMap onZoneSelect={setSelectedZone} selectedCity={selectedCity} />
       </div>
 
       {/* Charts Grid */}

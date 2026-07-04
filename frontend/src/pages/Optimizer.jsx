@@ -3,21 +3,42 @@ import HeatMap from '../components/Map/HeatMap'
 import InterventionPanel from '../components/Scenarios/InterventionPanel'
 import ScenarioCompare from '../components/Scenarios/ScenarioCompare'
 import GlassCard from '../components/common/GlassCard'
+import { runOptimization } from '../api/client'
 import './Optimizer.css'
 
-export default function Optimizer() {
+export default function Optimizer({ selectedCity = 'Delhi NCR' }) {
   const [isOptimizing, setIsOptimizing] = useState(false)
-  const [optimizationDone, setOptimizationDone] = useState(false)
+  const [results, setResults] = useState(null)
   const [budget, setBudget] = useState(100000)
 
-  const handleOptimize = () => {
+  const handleOptimize = async () => {
     setIsOptimizing(true)
-    setOptimizationDone(false)
-    // Simulate optimization
-    setTimeout(() => {
+    setResults(null)
+    
+    try {
+      const data = await runOptimization({
+        city: selectedCity,
+        budget: budget,
+        equity_weight: 1.0,
+        max_interventions_per_zone: 2,
+        target_zones: []
+      })
+      // The API returns an object with budget_used, mean_delta_t, equity_score
+      // If the API fails, the mock returns an array (MOCK_SCENARIOS). Handle both for safety:
+      if (Array.isArray(data)) {
+        setResults({
+          budget_used: budget * 0.92,
+          mean_delta_t: -3.6,
+          equity_score: 0.78
+        })
+      } else {
+        setResults(data)
+      }
+    } catch (e) {
+      console.error(e)
+    } finally {
       setIsOptimizing(false)
-      setOptimizationDone(true)
-    }, 3000)
+    }
   }
 
   const handleSimulate = (activeInterventions) => {
@@ -79,7 +100,7 @@ export default function Optimizer() {
         <div className="optimizer-center">
           <GlassCard title="Intervention Map Preview" icon="🗺️" accentColor="var(--accent-cyan)">
             <div className="optimizer-map-container">
-              <HeatMap />
+              <HeatMap selectedCity={selectedCity} />
             </div>
           </GlassCard>
         </div>
@@ -89,19 +110,19 @@ export default function Optimizer() {
       </div>
 
       {/* Optimization Results */}
-      {optimizationDone && (
+      {results && (
         <div className="opt-results animate-slide-up">
           <GlassCard title="Optimization Results" icon="✅" accentColor="var(--accent-emerald)">
             <div className="opt-results-grid">
               <div className="opt-result-stat">
                 <span className="opt-result-label">Budget Used</span>
-                <span className="opt-result-value">$92,400</span>
-                <span className="opt-result-sub">92.4% of ${(budget/1000)}K</span>
+                <span className="opt-result-value">${results.budget_used?.toLocaleString() || 0}</span>
+                <span className="opt-result-sub">{((results.budget_used / budget) * 100).toFixed(1)}% of ${(budget/1000)}K</span>
               </div>
               <div className="opt-result-stat">
                 <span className="opt-result-label">Avg ΔT</span>
-                <span className="opt-result-value opt-delta">-3.6°C</span>
-                <span className="opt-result-sub">Across 84 zones</span>
+                <span className="opt-result-value opt-delta">{results.mean_delta_t?.toFixed(2) || 0}°C</span>
+                <span className="opt-result-sub">Across target zones</span>
               </div>
               <div className="opt-result-stat">
                 <span className="opt-result-label">Population Covered</span>
@@ -110,7 +131,7 @@ export default function Optimizer() {
               </div>
               <div className="opt-result-stat">
                 <span className="opt-result-label">Equity Score</span>
-                <span className="opt-result-value">0.78</span>
+                <span className="opt-result-value">{results.equity_score?.toFixed(2) || 0}</span>
                 <span className="opt-result-sub">Vulnerability-weighted</span>
               </div>
             </div>

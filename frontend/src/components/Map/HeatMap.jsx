@@ -1,7 +1,15 @@
-import { useMemo } from 'react'
-import { MapContainer, TileLayer, CircleMarker, Tooltip } from 'react-leaflet'
-import { MOCK_HEATMAP_DATA } from '../../api/client'
+import { useMemo, useState, useEffect } from 'react'
+import { MapContainer, TileLayer, CircleMarker, Tooltip, useMap } from 'react-leaflet'
+import { fetchHeatmapData } from '../../api/client'
 import './HeatMap.css'
+
+function MapCentric({ center }) {
+  const map = useMap();
+  useEffect(() => {
+    map.setView(center);
+  }, [center, map]);
+  return null;
+}
 
 /* ── Colour helpers ──────────────────────────────────────────────────── */
 function lstToColor(lst) {
@@ -52,9 +60,35 @@ const LEGEND_STOPS = [
   { temp: '50°C', color: lstToColor(50), label: 'Hot' },
 ];
 
-export default function HeatMap({ data, height = '100%' }) {
-  const points = data || MOCK_HEATMAP_DATA;
-  const center = [28.6139, 77.2090];
+export default function HeatMap({ selectedCity = 'Delhi NCR', height = '100%' }) {
+  const [points, setPoints] = useState([]);
+  
+  useEffect(() => {
+    async function loadData() {
+      const data = await fetchHeatmapData(selectedCity);
+      // The API returns GeoJSON feature collection, but our mock returns an array of {lat, lng, lst}.
+      // If it's a feature collection, map it to the expected array format:
+      if (data && data.type === 'FeatureCollection') {
+        const mapped = data.features.map(f => ({
+          lat: f.properties.lat,
+          lng: f.properties.lon || f.properties.lng, // handles backend naming
+          lst: f.properties.lst
+        }));
+        setPoints(mapped);
+      } else if (Array.isArray(data)) {
+        setPoints(data);
+      }
+    }
+    loadData();
+  }, [selectedCity]);
+
+  // Dynamically center based on data
+  const center = useMemo(() => {
+    if (points.length > 0 && points[0].lat && points[0].lng) {
+      return [points[0].lat, points[0].lng];
+    }
+    return [28.6139, 77.2090];
+  }, [points]);
 
   // Downsample for performance — show every 2nd point
   const visiblePoints = useMemo(() => {
@@ -69,8 +103,8 @@ export default function HeatMap({ data, height = '100%' }) {
         zoom={11}
         className="heatmap-leaflet"
         zoomControl={true}
-        attributionControl={true}
       >
+        <MapCentric center={center} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>'
           url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"

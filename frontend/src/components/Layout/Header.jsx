@@ -1,6 +1,6 @@
 import './Header.css'
 
-export default function Header() {
+export default function Header({ selectedCity = 'Delhi NCR' }) {
   return (
     <header className="header">
       <div className="header__left">
@@ -36,8 +36,8 @@ export default function Header() {
         </div>
         <div className="header__divider" />
         <div className="header__info">
-          <span className="header__info-label">Delhi NCR</span>
-          <span className="header__info-value">28.6°N, 77.2°E</span>
+          <span className="header__info-label">{selectedCity}</span>
+          <span className="header__info-value">Monitoring Active</span>
         </div>
         <div className="header__divider" />
         <div className="header__info">

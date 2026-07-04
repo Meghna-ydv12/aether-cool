@@ -49,8 +49,7 @@ const LAYERS = [
   { id: 'interventions', label: 'Interventions', defaultOn: true },
 ]
 
-export default function Sidebar({ collapsed, onToggle }) {
-  const [selectedCity, setSelectedCity] = useState('Delhi NCR')
+export default function Sidebar({ collapsed, onToggle, selectedCity, onCityChange }) {
   const [layers, setLayers] = useState(
     LAYERS.reduce((acc, l) => ({ ...acc, [l.id]: l.defaultOn }), {})
   )
@@ -103,7 +102,7 @@ export default function Sidebar({ collapsed, onToggle }) {
             <select
               className="sidebar__select"
               value={selectedCity}
-              onChange={(e) => setSelectedCity(e.target.value)}
+              onChange={(e) => onCityChange(e.target.value)}
             >
               {CITIES.map((city) => (
                 <option key={city} value={city}>{city}</option>

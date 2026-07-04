@@ -54,8 +54,17 @@ class DataService:
         n = settings.GRID_SIZE  # 50
         rng = np.random.default_rng(_RNG_SEED)
 
-        center_lat = settings.DEFAULT_LAT
-        center_lon = settings.DEFAULT_LON
+        CITIES = {
+            "mumbai": (19.0760, 72.8777),
+            "bangalore": (12.9716, 77.5946),
+            "chennai": (13.0827, 80.2707),
+            "hyderabad": (17.3850, 78.4867),
+            "kolkata": (22.5726, 88.3639),
+            "delhi ncr": (28.6139, 77.2090)
+        }
+        
+        key = city.lower().strip()
+        center_lat, center_lon = CITIES.get(key, (settings.DEFAULT_LAT, settings.DEFAULT_LON))
 
         # Spatial extent ≈ 15 km × 15 km around centre
         lat_span = 0.135  # ~15 km
