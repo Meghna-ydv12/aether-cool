@@ -128,6 +128,25 @@ body::before {
   min-height: 100vh;
 }
 
+/* ── App Layout ────────────────────────────────────────────────────────── */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+}
+
+.app-content {
+  flex: 1;
+  padding-top: var(--header-height);
+  min-height: 100vh;
+  transition: margin-left var(--transition-slow);
+}
+
 /* ── Scrollbar Styling ─────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;

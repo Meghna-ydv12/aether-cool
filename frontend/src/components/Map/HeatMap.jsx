@@ -70,11 +70,12 @@ export default function HeatMap({ selectedCity = 'Delhi NCR', height = '100%' })
       // If it's a feature collection, map it to the expected array format:
       if (data && data.type === 'FeatureCollection') {
         const mapped = data.features.map(f => ({
-          lat: f.properties.lat,
-          lng: f.properties.lon || f.properties.lng, // handles backend naming
-          lst: f.properties.lst
+          lat: f.geometry?.coordinates?.[1] ?? f.properties?.lat,
+          lng: f.geometry?.coordinates?.[0] ?? f.properties?.lon ?? f.properties?.lng,
+          lst: f.properties?.lst
         }));
-        setPoints(mapped);
+        // Filter invalid points to prevent react-leaflet crash
+        setPoints(mapped.filter(pt => pt.lat !== undefined && pt.lng !== undefined));
       } else if (Array.isArray(data)) {
         setPoints(data);
       }
