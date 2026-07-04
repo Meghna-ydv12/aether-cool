@@ -116,12 +116,12 @@ export default function Optimizer({ selectedCity = 'Delhi NCR' }) {
             <div className="opt-results-grid">
               <div className="opt-result-stat">
                 <span className="opt-result-label">Budget Used</span>
-                <span className="opt-result-value">${results.budget_used?.toLocaleString() || 0}</span>
-                <span className="opt-result-sub">{((results.budget_used / budget) * 100).toFixed(1)}% of ${(budget/1000)}K</span>
+                <span className="opt-result-value">${(results.budget_used || 0).toLocaleString()}</span>
+                <span className="opt-result-sub">{(((results.budget_used || 0) / budget) * 100).toFixed(1)}% of ${(budget/1000)}K</span>
               </div>
               <div className="opt-result-stat">
                 <span className="opt-result-label">Avg ΔT</span>
-                <span className="opt-result-value opt-delta">{results.mean_delta_t?.toFixed(2) || 0}°C</span>
+                <span className="opt-result-value opt-delta">{(results.mean_delta_t || 0).toFixed(2)}°C</span>
                 <span className="opt-result-sub">Across target zones</span>
               </div>
               <div className="opt-result-stat">
@@ -131,7 +131,7 @@ export default function Optimizer({ selectedCity = 'Delhi NCR' }) {
               </div>
               <div className="opt-result-stat">
                 <span className="opt-result-label">Equity Score</span>
-                <span className="opt-result-value">{results.equity_score?.toFixed(2) || 0}</span>
+                <span className="opt-result-value">{(results.equity_score || 0).toFixed(2)}</span>
                 <span className="opt-result-sub">Vulnerability-weighted</span>
               </div>
             </div>

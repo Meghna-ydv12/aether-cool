@@ -134,6 +134,12 @@
   border-radius: var(--radius-sm);
   padding: 9px 12px;
   font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.sidebar__select option {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .sidebar__date-range {

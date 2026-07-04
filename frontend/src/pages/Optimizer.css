@@ -123,6 +123,10 @@
 }
 
 /* Results */
+.opt-results {
+  margin-top: var(--space-lg);
+}
+
 .opt-results-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
